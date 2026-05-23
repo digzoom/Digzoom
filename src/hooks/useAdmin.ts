@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
+import type { Product } from '@/types';
 
 export interface AdminOrder {
   id: string;
@@ -39,8 +40,10 @@ export interface DashboardStats {
 const STORAGE_KEY_ORDERS = 'digzoom_admin_orders';
 const STORAGE_KEY_PROVIDERS = 'digzoom_admin_providers';
 const STORAGE_KEY_SETTINGS = 'digzoom_admin_settings';
+const STORAGE_KEY_ADMIN_PRODUCTS = 'digzoom_admin_products';
 
 const generateId = () => Math.random().toString(36).substring(2, 10).toUpperCase();
+let nextProductId = 10000;
 
 const getTodayDate = () => new Date().toISOString().split('T')[0];
 
@@ -160,6 +163,16 @@ export function useAdmin() {
     }
   });
 
+  // Product management state
+  const [adminProducts, setAdminProducts] = useState<Product[]>(() => {
+    try {
+      const saved = localStorage.getItem(STORAGE_KEY_ADMIN_PRODUCTS);
+      return saved ? JSON.parse(saved) : [];
+    } catch {
+      return [];
+    }
+  });
+
   // Save orders
   useEffect(() => {
     localStorage.setItem(STORAGE_KEY_ORDERS, JSON.stringify(orders));
@@ -174,6 +187,11 @@ export function useAdmin() {
   useEffect(() => {
     localStorage.setItem(STORAGE_KEY_SETTINGS, JSON.stringify({ autoProcess }));
   }, [autoProcess]);
+
+  // Save admin products
+  useEffect(() => {
+    localStorage.setItem(STORAGE_KEY_ADMIN_PRODUCTS, JSON.stringify(adminProducts));
+  }, [adminProducts]);
 
   // Stats
   const stats: DashboardStats = {
@@ -282,10 +300,42 @@ export function useAdmin() {
     [orders]
   );
 
+  // Product CRUD
+  const addProduct = useCallback((product: Omit<Product, 'id'>) => {
+    const newProduct: Product = {
+      ...product,
+      id: nextProductId++,
+    };
+    setAdminProducts(prev => [newProduct, ...prev]);
+    return newProduct;
+  }, []);
+
+  const updateProduct = useCallback((productId: number, updates: Partial<Product>) => {
+    setAdminProducts(prev =>
+      prev.map(p => p.id === productId ? { ...p, ...updates } : p)
+    );
+  }, []);
+
+  const deleteProduct = useCallback((productId: number) => {
+    setAdminProducts(prev => prev.filter(p => p.id !== productId));
+  }, []);
+
+  const getFilteredProducts = useCallback((search?: string, category?: string) => {
+    return adminProducts.filter(p => {
+      if (category && p.category !== category) return false;
+      if (search) {
+        const q = search.toLowerCase();
+        return p.title.toLowerCase().includes(q) || p.description.toLowerCase().includes(q);
+      }
+      return true;
+    });
+  }, [adminProducts]);
+
   return {
     orders,
     stats,
     providers,
+    adminProducts,
     autoProcess,
     setAutoProcess,
     addOrder,
@@ -295,5 +345,9 @@ export function useAdmin() {
     addProvider,
     removeProvider,
     getFilteredOrders,
+    addProduct,
+    updateProduct,
+    deleteProduct,
+    getFilteredProducts,
   };
 }

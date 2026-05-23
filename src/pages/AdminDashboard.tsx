@@ -11,6 +11,7 @@ import {
   ArrowUpRight, RefreshCw, ExternalLink, Wallet, Server,
   Plus, Trash, HelpCircle, Copy, Check
 } from 'lucide-react';
+import AdminProducts from '@/components/AdminProducts';
 
 const statusConfig: Record<string, { color: string; bg: string; border: string; icon: React.ReactNode }> = {
   pending: { color: 'text-yellow-400', bg: 'bg-yellow-500/10', border: 'border-yellow-500/20', icon: <Clock className="w-4 h-4" /> },
@@ -28,7 +29,7 @@ const statusLabels: Record<string, { ar: string; en: string }> = {
   failed: { ar: 'فاشل', en: 'Failed' },
 };
 
-type TabType = 'dashboard' | 'orders' | 'providers' | 'settings' | 'guide';
+type TabType = 'dashboard' | 'orders' | 'products' | 'providers' | 'settings' | 'guide';
 
 export default function AdminDashboard() {
   const { lang } = useLanguage();
@@ -37,9 +38,9 @@ export default function AdminDashboard() {
   const isAr = lang === 'ar';
 
   const {
-    orders, stats, autoProcess, setAutoProcess,
+    orders, stats, adminProducts, autoProcess, setAutoProcess,
     updateOrderStatus, processOrder, deleteOrder,
-    getFilteredOrders,
+    getFilteredOrders, addProduct, updateProduct, deleteProduct,
   } = useAdmin();
 
   const {
@@ -97,7 +98,8 @@ export default function AdminDashboard() {
   const tabs: { id: TabType; label: string; icon: React.ReactNode }[] = [
     { id: 'dashboard', label: isAr ? 'الرئيسية' : 'Dashboard', icon: <LayoutDashboard className="w-5 h-5" /> },
     { id: 'orders', label: isAr ? 'الطلبات' : 'Orders', icon: <ShoppingBag className="w-5 h-5" /> },
-    { id: 'providers', label: isAr ? 'المزودين' : 'Providers', icon: <Package className="w-5 h-5" /> },
+    { id: 'products', label: isAr ? 'المنتجات' : 'Products', icon: <Package className="w-5 h-5" /> },
+    { id: 'providers', label: isAr ? 'المزودين' : 'Providers', icon: <Server className="w-5 h-5" /> },
     { id: 'guide', label: isAr ? 'دليل الربط' : 'Setup Guide', icon: <HelpCircle className="w-5 h-5" /> },
     { id: 'settings', label: isAr ? 'الإعدادات' : 'Settings', icon: <Settings className="w-5 h-5" /> },
   ];
@@ -380,6 +382,18 @@ export default function AdminDashboard() {
               </div>
             )}
           </div>
+        )}
+
+        {/* ========== PRODUCTS TAB ========== */}
+        {activeTab === 'products' && (
+          <AdminProducts
+            isAr={isAr}
+            adminProducts={adminProducts}
+            addProduct={addProduct}
+            updateProduct={updateProduct}
+            deleteProduct={deleteProduct}
+            showToast={showToast}
+          />
         )}
 
         {/* ========== PROVIDERS TAB ========== */}
