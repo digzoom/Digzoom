@@ -26,6 +26,25 @@ export default function About() {
           <p className="text-gray-400 text-lg max-w-2xl mx-auto leading-relaxed">{t.about.heroText}</p>
         </div>
 
+        {/* Brand Identity */}
+        <div className="mb-20">
+          <h2 className="text-3xl font-bold text-white text-center mb-4">
+            {t.lang === 'ar' ? 'هوية digzoom' : 'The digzoom Identity'}
+          </h2>
+          <p className="text-gray-400 text-center max-w-xl mx-auto mb-10">
+            {t.lang === 'ar'
+              ? 'النمر الرقمي — رمز القوة والتقنية في عالم المنتجات الرقمية'
+              : 'The Digital Tiger — a symbol of power and technology in the digital products world'}
+          </p>
+          <div className="max-w-3xl mx-auto rounded-3xl overflow-hidden border-2 border-purple-500/20 shadow-2xl shadow-purple-500/10">
+            <img
+              src="/images/digzoom-brand.jpg"
+              alt="digzoom brand identity - Digital Tiger"
+              className="w-full h-auto"
+            />
+          </div>
+        </div>
+
         {/* Mission & Vision */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-20">
           <div className="space-y-8">
