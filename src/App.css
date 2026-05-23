@@ -1,0 +1,59 @@
+/* ===== digzoom Premium Styles ===== */
+
+/* Smooth scroll */
+html { scroll-behavior: smooth; }
+
+/* Custom scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #0a0a0f; }
+::-webkit-scrollbar-thumb { background: #334155; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #475569; }
+
+/* Line clamp */
+.line-clamp-1 { display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden; }
+.line-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+
+/* Selection */
+::selection { background: rgba(59, 130, 246, 0.25); color: white; }
+
+/* Custom scrollbar for checkout */
+.custom-scrollbar::-webkit-scrollbar { width: 4px; }
+.custom-scrollbar::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 2px; }
+
+/* Input number arrow removal */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+
+/* Focus ring */
+*:focus-visible { outline: 2px solid rgba(59, 130, 246, 0.5); outline-offset: 2px; border-radius: 8px; }
+
+/* Font size fix - prevent oversized text on mobile */
+html { font-size: 14px; }
+@media (min-width: 640px) { html { font-size: 15px; } }
+@media (min-width: 1024px) { html { font-size: 16px; } }
+
+body { 
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Tahoma', sans-serif;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+/* Loading skeleton animation */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* Fade in */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-in { animation: fadeIn 0.4s ease-out; }
+
+/* Button press */
+button:active { transform: scale(0.98); }
+
+/* Image loading */
+img { transition: opacity 0.3s; }
+img[src=""] { opacity: 0; }
