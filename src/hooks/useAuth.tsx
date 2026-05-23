@@ -1,4 +1,5 @@
 import { createContext, useContext, useState, useCallback, useEffect, type ReactNode } from 'react';
+import { auth as firebaseAuth, signInWithGoogle, logout as firebaseLogout, onAuthStateChanged, type User as FirebaseUser } from '@/lib/firebase';
 
 interface User {
   id: string;
@@ -6,6 +7,7 @@ interface User {
   email: string;
   role: 'user' | 'admin';
   avatar?: string;
+  firebase?: boolean;
 }
 
 interface AuthContextType {
@@ -13,6 +15,7 @@ interface AuthContextType {
   login: (email: string, password: string) => Promise<boolean>;
   register: (name: string, email: string, password: string) => Promise<boolean>;
   logout: () => void;
+  signInWithGoogle: () => Promise<void>;
   isAdmin: boolean;
   isLoading: boolean;
 }
@@ -45,16 +48,37 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
+  // Listen for Firebase auth state
   useEffect(() => {
-    const saved = localStorage.getItem('digzoom-user');
-    if (saved) {
-      try {
-        setUser(JSON.parse(saved));
-      } catch {
-        localStorage.removeItem('digzoom-user');
+    const unsub = onAuthStateChanged(firebaseAuth, (firebaseUser: FirebaseUser | null) => {
+      if (firebaseUser) {
+        const u: User = {
+          id: firebaseUser.uid,
+          name: firebaseUser.displayName || firebaseUser.email?.split('@')[0] || 'User',
+          email: firebaseUser.email || '',
+          role: 'user',
+          avatar: firebaseUser.photoURL || undefined,
+          firebase: true,
+        };
+        setUser(u);
+        localStorage.setItem('digzoom-user', JSON.stringify(u));
+      } else {
+        // Check local auth
+        const saved = localStorage.getItem('digzoom-user');
+        if (saved) {
+          try {
+            const parsed = JSON.parse(saved);
+            if (!parsed.firebase) {
+              setUser(parsed);
+            }
+          } catch {
+            localStorage.removeItem('digzoom-user');
+          }
+        }
       }
-    }
-    setIsLoading(false);
+      setIsLoading(false);
+    });
+    return () => unsub();
   }, []);
 
   const login = useCallback(async (email: string, password: string): Promise<boolean> => {
@@ -85,8 +109,15 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const logout = useCallback(() => {
+    if (user?.firebase) {
+      firebaseLogout();
+    }
     setUser(null);
     localStorage.removeItem('digzoom-user');
+  }, [user]);
+
+  const signInWithGoogleFn = useCallback(async () => {
+    await signInWithGoogle();
   }, []);
 
   return (
@@ -95,6 +126,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       login,
       register,
       logout,
+      signInWithGoogle: signInWithGoogleFn,
       isAdmin: user?.role === 'admin',
       isLoading,
     }}>

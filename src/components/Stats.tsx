@@ -1,9 +1,9 @@
 import { Users, Package, Download, Star } from 'lucide-react';
 
 const stats = [
-  { icon: <Package className="w-6 h-6" />, value: '12,000+', label: 'منتج رقمي' },
-  { icon: <Users className="w-6 h-6" />, value: '8,500+', label: 'عميل سعيد' },
-  { icon: <Download className="w-6 h-6" />, value: '45,000+', label: 'عملية تحميل' },
+  { icon: <Package className="w-6 h-6" />, value: '300+', label: 'منتج رقمي' },
+  { icon: <Users className="w-6 h-6" />, value: '12,000+', label: 'عميل سعيد' },
+  { icon: <Download className="w-6 h-6" />, value: '75,000+', label: 'عملية تحميل' },
   { icon: <Star className="w-6 h-6" />, value: '4.9', label: 'متوسط التقييم' },
 ];
 
