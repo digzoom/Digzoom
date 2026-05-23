@@ -8,31 +8,11 @@ export default function Hero() {
   const Arrow = isRTL ? ArrowLeft : ArrowRight;
 
   return (
-    <section className="relative min-h-[90vh] flex items-center justify-center bg-[#0a0a0f]">
-      {/* Subtle glow orbs */}
-      <div
-        className="absolute w-[500px] h-[500px] rounded-full pointer-events-none"
-        style={{
-          top: '-10%',
-          left: '-5%',
-          background: 'radial-gradient(circle, rgba(139,92,246,0.08) 0%, transparent 70%)',
-          filter: 'blur(100px)',
-        }}
-      />
-      <div
-        className="absolute w-[400px] h-[400px] rounded-full pointer-events-none"
-        style={{
-          bottom: '-5%',
-          right: '-5%',
-          background: 'radial-gradient(circle, rgba(59,130,246,0.06) 0%, transparent 70%)',
-          filter: 'blur(100px)',
-        }}
-      />
-
-      {/* Main content */}
-      <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 text-center pt-20 pb-16">
+    <section className="relative min-h-[85vh] flex items-center justify-center">
+      {/* Content */}
+      <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 text-center pt-20 pb-12">
         {/* Badge */}
-        <div className="inline-flex items-center gap-2 bg-white/[0.03] border border-white/[0.08] rounded-full px-4 py-2 mb-8">
+        <div className="inline-flex items-center gap-2 bg-white/[0.03] border border-white/[0.08] rounded-full px-5 py-2 mb-8">
           <Sparkles className="w-4 h-4 text-purple-400" />
           <span className="text-gray-300 text-sm">
             {lang === 'ar' ? 'أكثر من 300 منتج رقمي مميز' : '300+ Premium Digital Products'}
