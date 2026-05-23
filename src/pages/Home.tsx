@@ -61,16 +61,16 @@ export default function Home() {
             </p>
           </div>
 
-          {/* Social Service Cards */}
+          {/* Social Service Cards - Clickable */}
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 mb-10">
             {[
-              { icon: <Instagram className="w-8 h-8" />, name: lang === 'ar' ? 'متابعين انستقرام' : 'Instagram Followers', color: 'from-purple-600 to-pink-600', border: 'border-purple-500/30', shadow: 'shadow-purple-500/20', price: '49', desc: lang === 'ar' ? '1000 متابع حقيقي' : '1000 Real Followers' },
-              { icon: <Play className="w-8 h-8" />, name: lang === 'ar' ? 'مشاهدات تيك توك' : 'TikTok Views', color: 'from-cyan-500 to-blue-600', border: 'border-cyan-500/30', shadow: 'shadow-cyan-500/20', price: '29', desc: lang === 'ar' ? '10,000 مشاهدة' : '10,000 Views' },
-              { icon: <Youtube className="w-8 h-8" />, name: lang === 'ar' ? 'مشتركين يوتيوب' : 'YouTube Subs', color: 'from-red-600 to-orange-600', border: 'border-red-500/30', shadow: 'shadow-red-500/20', price: '79', desc: lang === 'ar' ? '1000 مشترك' : '1000 Subscribers' },
-              { icon: <MessageCircle className="w-8 h-8" />, name: lang === 'ar' ? 'لايكات واتساب' : 'WhatsApp Status', color: 'from-green-500 to-emerald-600', border: 'border-green-500/30', shadow: 'shadow-green-500/20', price: '39', desc: lang === 'ar' ? '500 مشاهدة' : '500 Views' },
-              { icon: <Twitter className="w-8 h-8" />, name: lang === 'ar' ? 'متابعين تويتر' : 'X Followers', color: 'from-blue-500 to-indigo-600', border: 'border-blue-500/30', shadow: 'shadow-blue-500/20', price: '59', desc: lang === 'ar' ? '1000 متابع' : '1000 Followers' },
+              { icon: <Instagram className="w-8 h-8" />, name: lang === 'ar' ? 'متابعين انستقرام' : 'Instagram Followers', color: 'from-purple-600 to-pink-600', border: 'border-purple-500/30', shadow: 'shadow-purple-500/20', price: '49', desc: lang === 'ar' ? '1000 متابع حقيقي' : '1000 Real Followers', link: '/social' },
+              { icon: <Play className="w-8 h-8" />, name: lang === 'ar' ? 'مشاهدات تيك توك' : 'TikTok Views', color: 'from-cyan-500 to-blue-600', border: 'border-cyan-500/30', shadow: 'shadow-cyan-500/20', price: '29', desc: lang === 'ar' ? '10,000 مشاهدة' : '10,000 Views', link: '/social' },
+              { icon: <Youtube className="w-8 h-8" />, name: lang === 'ar' ? 'مشتركين يوتيوب' : 'YouTube Subs', color: 'from-red-600 to-orange-600', border: 'border-red-500/30', shadow: 'shadow-red-500/20', price: '79', desc: lang === 'ar' ? '1000 مشترك' : '1000 Subscribers', link: '/social' },
+              { icon: <MessageCircle className="w-8 h-8" />, name: lang === 'ar' ? 'لايكات واتساب' : 'WhatsApp Status', color: 'from-green-500 to-emerald-600', border: 'border-green-500/30', shadow: 'shadow-green-500/20', price: '39', desc: lang === 'ar' ? '500 مشاهدة' : '500 Views', link: '/social' },
+              { icon: <Twitter className="w-8 h-8" />, name: lang === 'ar' ? 'متابعين تويتر' : 'X Followers', color: 'from-blue-500 to-indigo-600', border: 'border-blue-500/30', shadow: 'shadow-blue-500/20', price: '59', desc: lang === 'ar' ? '1000 متابع' : '1000 Followers', link: '/social' },
             ].map((service, i) => (
-              <div key={i} className={`group relative bg-gradient-to-b from-white/[0.03] to-transparent rounded-2xl border ${service.border} p-5 hover:-translate-y-2 transition-all duration-300 cursor-pointer hover:shadow-xl hover:${service.shadow}`}>
+              <Link key={i} to={service.link} className={`group relative bg-gradient-to-b from-white/[0.03] to-transparent rounded-2xl border ${service.border} p-5 hover:-translate-y-2 transition-all duration-300 cursor-pointer hover:shadow-xl hover:${service.shadow} block`}>
                 <div className={`w-14 h-14 rounded-xl bg-gradient-to-br ${service.color} flex items-center justify-center text-white mb-4 shadow-lg mx-auto`}>
                   {service.icon}
                 </div>
@@ -80,7 +80,7 @@ export default function Home() {
                   <span className="text-xl font-bold text-white">{service.price} {t.featured.currency}</span>
                 </div>
                 <div className={`absolute top-3 right-3 w-2 h-2 rounded-full bg-gradient-to-r ${service.color} animate-pulse`} />
-              </div>
+              </Link>
             ))}
           </div>
 
@@ -91,6 +91,58 @@ export default function Home() {
             </Link>
             <a href="https://wa.me/00966569888456" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 border border-green-500/30 text-green-400 hover:bg-green-500/10 px-8 py-3 rounded-xl font-medium transition-all">
               <MessageSquare className="w-4 h-4" /> {lang === 'ar' ? 'طلب عبر واتساب' : 'Order via WhatsApp'}
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* DIGITAL MARKETING SERVICES */}
+      <section className="py-16 bg-gradient-to-b from-[#0a0a0f] via-[#0f0a1a] to-[#0a0a0f] border-y border-blue-500/10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Header */}
+          <div className="text-center mb-12">
+            <div className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-600/20 to-cyan-600/20 border border-blue-500/20 rounded-full px-4 py-1.5 mb-4">
+              <TrendingUp className="w-4 h-4 text-blue-400" />
+              <span className="text-blue-300 text-xs font-bold tracking-wider uppercase">{lang === 'ar' ? 'خدمات احترافية' : 'PROFESSIONAL SERVICES'}</span>
+            </div>
+            <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3">
+              {lang === 'ar' ? 'خدمات التسويق الرقمي' : 'Digital Marketing Services'}
+            </h2>
+            <p className="text-gray-400 text-sm max-w-xl mx-auto">
+              {lang === 'ar' ? 'خدمات تسويقية احترافية لنمو علامتك التجارية وزيادة مبيعاتك' : 'Professional marketing services to grow your brand and increase sales'}
+            </p>
+          </div>
+
+          {/* Marketing Service Cards */}
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 mb-10">
+            {[
+              { icon: <Layout className="w-8 h-8" />, name: lang === 'ar' ? 'إدارة حسابات' : 'Account Management', color: 'from-blue-600 to-indigo-600', border: 'border-blue-500/30', shadow: 'shadow-blue-500/20', price: '500', desc: lang === 'ar' ? 'إدارة كاملة شهرياً' : 'Full monthly management' },
+              { icon: <Zap className="w-8 h-8" />, name: lang === 'ar' ? 'إعلانات ممولة' : 'Paid Ads', color: 'from-orange-500 to-red-600', border: 'border-orange-500/30', shadow: 'shadow-orange-500/20', price: '300', desc: lang === 'ar' ? 'حملة إعلانية واحدة' : 'One ad campaign' },
+              { icon: <Palette className="w-8 h-8" />, name: lang === 'ar' ? 'تصميم محتوى' : 'Content Design', color: 'from-pink-500 to-rose-600', border: 'border-pink-500/30', shadow: 'shadow-pink-500/20', price: '200', desc: lang === 'ar' ? '10 تصاميم بوستات' : '10 post designs' },
+              { icon: <Type className="w-8 h-8" />, name: lang === 'ar' ? 'كتابة محتوى' : 'Copywriting', color: 'from-emerald-500 to-teal-600', border: 'border-emerald-500/30', shadow: 'shadow-emerald-500/20', price: '150', desc: lang === 'ar' ? '20 كابشن إبداعي' : '20 creative captions' },
+              { icon: <Globe className="w-8 h-8" />, name: lang === 'ar' ? 'SEO تحسين' : 'SEO Optimization', color: 'from-violet-500 to-purple-600', border: 'border-violet-500/30', shadow: 'shadow-violet-500/20', price: '250', desc: lang === 'ar' ? 'تحسين شامل للموقع' : 'Full site optimization' },
+            ].map((service, i) => (
+              <Link key={i} to="/marketing" className={`group relative bg-gradient-to-b from-white/[0.03] to-transparent rounded-2xl border ${service.border} p-5 hover:-translate-y-2 transition-all duration-300 cursor-pointer hover:shadow-xl hover:${service.shadow} block`}>
+                <div className={`w-14 h-14 rounded-xl bg-gradient-to-br ${service.color} flex items-center justify-center text-white mb-4 shadow-lg mx-auto`}>
+                  {service.icon}
+                </div>
+                <h3 className="text-white font-bold text-sm text-center mb-1">{service.name}</h3>
+                <p className="text-gray-500 text-xs text-center mb-3">{service.desc}</p>
+                <div className="text-center">
+                  <span className="text-xl font-bold text-white">{service.price} {t.featured.currency}</span>
+                </div>
+                <div className={`absolute top-3 right-3 w-2 h-2 rounded-full bg-gradient-to-r ${service.color} animate-pulse`} />
+              </Link>
+            ))}
+          </div>
+
+          {/* Quick Action Buttons */}
+          <div className="flex flex-wrap items-center justify-center gap-4">
+            <Link to="/marketing" className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white px-8 py-3 rounded-xl font-medium shadow-lg shadow-blue-500/20 transition-all">
+              {lang === 'ar' ? 'تصفح كل الخدمات' : 'Browse All Services'} <Arrow className="w-4 h-4" />
+            </Link>
+            <a href="https://wa.me/00966569888456" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 border border-green-500/30 text-green-400 hover:bg-green-500/10 px-8 py-3 rounded-xl font-medium transition-all">
+              <MessageSquare className="w-4 h-4" /> {lang === 'ar' ? 'استشارة مجانية' : 'Free Consultation'}
             </a>
           </div>
         </div>
