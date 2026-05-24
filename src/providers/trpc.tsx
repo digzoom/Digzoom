@@ -6,7 +6,9 @@ import superjson from 'superjson';
 import type { AppRouter } from '../../api/router';
 
 // API URL: Railway in production, localhost in dev
-const API_URL = import.meta.env.VITE_API_URL || '';
+// API URL without trailing slash
+const rawUrl = import.meta.env.VITE_API_URL || '';
+const API_URL = rawUrl.replace(/\/$/, '');
 
 export const trpc = createTRPCReact<AppRouter>();
 
