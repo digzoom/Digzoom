@@ -9,9 +9,10 @@ import {
   Package, Settings, Search, Clock, CheckCircle,
   XCircle, AlertCircle, Play, Pause, Trash2, Eye, MessageSquare,
   ArrowUpRight, RefreshCw, ExternalLink, Wallet, Server,
-  Plus, Trash, HelpCircle, Copy, Check
+  Plus, Trash, HelpCircle, Copy, Check, BarChart3
 } from 'lucide-react';
 import AdminProducts from '@/components/AdminProducts';
+import AnalyticsDashboard from '@/components/AnalyticsDashboard';
 
 const statusConfig: Record<string, { color: string; bg: string; border: string; icon: React.ReactNode }> = {
   pending: { color: 'text-yellow-400', bg: 'bg-yellow-500/10', border: 'border-yellow-500/20', icon: <Clock className="w-4 h-4" /> },
@@ -29,7 +30,7 @@ const statusLabels: Record<string, { ar: string; en: string }> = {
   failed: { ar: 'فاشل', en: 'Failed' },
 };
 
-type TabType = 'dashboard' | 'orders' | 'products' | 'providers' | 'settings' | 'guide';
+type TabType = 'dashboard' | 'analytics' | 'orders' | 'products' | 'providers' | 'settings' | 'guide';
 
 export default function AdminDashboard() {
   const { lang } = useLanguage();
@@ -97,6 +98,7 @@ export default function AdminDashboard() {
 
   const tabs: { id: TabType; label: string; icon: React.ReactNode }[] = [
     { id: 'dashboard', label: isAr ? 'الرئيسية' : 'Dashboard', icon: <LayoutDashboard className="w-5 h-5" /> },
+    { id: 'analytics', label: isAr ? 'Analytics' : 'Analytics', icon: <BarChart3 className="w-5 h-5" /> },
     { id: 'orders', label: isAr ? 'الطلبات' : 'Orders', icon: <ShoppingBag className="w-5 h-5" /> },
     { id: 'products', label: isAr ? 'المنتجات' : 'Products', icon: <Package className="w-5 h-5" /> },
     { id: 'providers', label: isAr ? 'المزودين' : 'Providers', icon: <Server className="w-5 h-5" /> },
@@ -120,7 +122,7 @@ export default function AdminDashboard() {
         <div className="flex items-center justify-between mb-8">
           <div>
             <h1 className="text-3xl font-extrabold text-white">
-              {isAr ? 'لوحة التحكم' : 'Admin Dashboard'}
+              {isAr ? 'لوحة التحكم - Analytics' : 'Admin Dashboard'}
             </h1>
             <p className="text-gray-500 mt-1">
               {isAr ? 'إدارة الطلبات والمزودين والإعدادات' : 'Manage orders, providers and settings'}
@@ -172,6 +174,11 @@ export default function AdminDashboard() {
             </button>
           ))}
         </div>
+
+        {/* ========== ANALYTICS TAB ========== */}
+        {activeTab === 'analytics' && (
+          <AnalyticsDashboard lang={lang} />
+        )}
 
         {/* ========== DASHBOARD TAB ========== */}
         {activeTab === 'dashboard' && (
@@ -561,7 +568,7 @@ export default function AdminDashboard() {
                 <h3 className="text-white font-bold text-lg">{isAr ? 'أضف المزود في digzoom' : 'Add Provider to digzoom'}</h3>
               </div>
               <ol className="space-y-3 text-gray-300 text-sm">
-                <li className="flex items-start gap-3"><span className="text-blue-400 font-bold">1.</span>{isAr ? 'افتح لوحة التحكم ← تبويب "المزودين"' : 'Open Dashboard ← "Providers" tab'}</li>
+                <li className="flex items-start gap-3"><span className="text-blue-400 font-bold">1.</span>{isAr ? 'افتح لوحة التحكم - Analytics ← تبويب "المزودين"' : 'Open Dashboard ← "Providers" tab'}</li>
                 <li className="flex items-start gap-3"><span className="text-blue-400 font-bold">2.</span>{isAr ? 'املأ البيانات (الاسم + رابط API + API Key)' : 'Fill in the details (Name + API URL + API Key)'}</li>
                 <li className="flex items-start gap-3"><span className="text-blue-400 font-bold">3.</span>{isAr ? 'اضغط "إضافة المزود"' : 'Click "Add Provider"'}</li>
               </ol>
