@@ -1,8 +1,8 @@
 import { useEffect, type ReactNode } from 'react';
 import { useLocation } from 'react-router';
 
-// Google Analytics 4 - Replace with your real Measurement ID
-const GA4_ID = import.meta.env.VITE_GA4_ID || 'G-PLACEHOLDER';
+// Google Analytics 4
+const GA4_ID = import.meta.env.VITE_GA4_ID || 'G-6JBMFTYHJ9';
 // Microsoft Clarity - Replace with your real Project ID
 const CLARITY_ID = import.meta.env.VITE_CLARITY_ID || 'PLACEHOLDER';
 
