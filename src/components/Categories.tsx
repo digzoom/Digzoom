@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import { BookOpen, Layout, Globe, Palette, Briefcase, GraduationCap, Package, ArrowLeft } from 'lucide-react';
 import { useLanguage } from '@/hooks/useLanguage';
 import { categories } from '@/data/products';

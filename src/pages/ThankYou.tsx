@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import { CheckCircle, Download, Home, Package, Clock, ShieldCheck } from 'lucide-react';
 import { useLanguage } from '@/hooks/useLanguage';
 import type { Product } from '@/types';

@@ -1,5 +1,5 @@
 import { useState, useMemo } from 'react';
-import { Link, useSearchParams } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router';
 import { Star, ShoppingCart, Search, LayoutGrid, List, X, Sparkles } from 'lucide-react';
 import { getProducts, categories } from '@/data/products';
 import { useCart } from '@/hooks/useCart';

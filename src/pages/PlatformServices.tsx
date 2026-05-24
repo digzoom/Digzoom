@@ -1,4 +1,4 @@
-import { useParams, Link, useNavigate } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router';
 import { useLanguage } from '@/hooks/useLanguage';
 import { getPlatformById } from '@/data/socialServices';
 import {

@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router';
+import { Link } from 'react-router';
 import { Star, ShoppingCart, Check, FileText, HardDrive, Download, ArrowLeft, ArrowRight, ShieldCheck, Heart } from 'lucide-react';
 import { getProductById, getRelatedProducts } from '@/data/products';
 import { useCart } from '@/hooks/useCart';

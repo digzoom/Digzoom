@@ -3,7 +3,7 @@ import { useLanguage } from '@/hooks/useLanguage';
 import { Check, Sparkles, Zap, Building2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { subscriptions } from '@/data/products';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 
 export default function Subscriptions() {
   const { lang } = useLanguage();

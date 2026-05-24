@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import { ArrowLeft, ArrowRight, Download, ShieldCheck, Zap, Sparkles } from 'lucide-react';
 import { useLanguage } from '@/hooks/useLanguage';
 

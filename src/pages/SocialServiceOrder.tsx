@@ -1,5 +1,5 @@
 import { useState, useMemo } from 'react';
-import { useParams, Link, useNavigate } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router';
 import { useLanguage } from '@/hooks/useLanguage';
 import { getServiceById } from '@/data/socialServices';
 import { Button } from '@/components/ui/button';
