@@ -5,6 +5,9 @@ import { useState, type ReactNode } from 'react';
 import superjson from 'superjson';
 import type { AppRouter } from '../../api/router';
 
+// API URL: Railway in production, localhost in dev
+const API_URL = import.meta.env.VITE_API_URL || '';
+
 export const trpc = createTRPCReact<AppRouter>();
 
 export function TRPCProvider({ children }: { children: ReactNode }) {
@@ -21,8 +24,13 @@ export function TRPCProvider({ children }: { children: ReactNode }) {
     trpc.createClient({
       links: [
         httpBatchLink({
-          url: '/api/trpc',
+          url: API_URL ? `${API_URL}/api/trpc` : '/api/trpc',
           transformer: superjson,
+          headers() {
+            return {
+              'x-trpc-source': 'digzoom-web',
+            };
+          },
         }),
       ],
     }),
