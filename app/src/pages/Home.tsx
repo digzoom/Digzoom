@@ -144,8 +144,8 @@ export default function Home() {
       <section className="py-16 px-4">
         <div className="max-w-7xl mx-auto">
           <SectionHeader badge="بطاقات الألعاب" badgeColor="purple"
-            title="اشحن رصيدك بأفضل الأسعار"
-            subtitle="بطاقات PlayStation، Xbox، Steam، Roblox، Nintendo وغيرها" />
+            title="بطاقات ألعاب حقيقية بأفضل الأسعار"
+            subtitle="PlayStation، Xbox، Steam، Roblox، Nintendo وغيرها — صور حقيقية 100%" />
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
             {gamingCards.map((c, i) => (
               <div key={i} className="group relative bg-[#151520] border border-white/[0.06] rounded-2xl p-4 hover:border-blue-500/30 transition-all hover:-translate-y-1 cursor-pointer">
