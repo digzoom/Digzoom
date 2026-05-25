@@ -1,5 +1,5 @@
 [build]
-  command = "echo 'Using pre-built dist'"
+  command = ""
   publish = "dist"
 
 [[redirects]]
