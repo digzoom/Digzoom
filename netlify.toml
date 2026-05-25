@@ -1,5 +1,6 @@
 [build]
-  command = "npm run build"
+  base = "app"
+  command = "echo 'Using pre-built dist'"
   publish = "dist"
 
 [[redirects]]
