@@ -1,7 +1,7 @@
 import { Routes, Route } from 'react-router'
 import { Toaster } from '@/components/ui/sonner'
-import { TRPCProvider } from '@/providers/trpc'
-import { AnalyticsProvider } from '@/providers/AnalyticsProvider'
+import { LanguageProvider } from '@/hooks/useLanguage.tsx'
+import { CartProvider } from '@/hooks/useCart.tsx'
 import Home from './pages/Home'
 import Login from './pages/Login'
 import NotFound from './pages/NotFound'
@@ -21,8 +21,8 @@ import Payment from './pages/Payment'
 
 export default function App() {
   return (
-    <TRPCProvider>
-      <AnalyticsProvider>
+    <LanguageProvider>
+      <CartProvider>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
@@ -42,8 +42,8 @@ export default function App() {
           <Route path="/payment" element={<Payment />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
-        <Toaster position="top-center" richColors />
-      </AnalyticsProvider>
-    </TRPCProvider>
+        <Toaster />
+      </CartProvider>
+    </LanguageProvider>
   )
 }
