@@ -33,12 +33,12 @@ const trustBlocks = [
 ];
 
 const gamingCards = [
-  { name: 'بطاقة PlayStation', value: '50$ سعودي', price: 195, grad: 'from-blue-600 to-indigo-800', badge: 'الأكثر مبيعاً', badgeColor: 'from-red-500 to-pink-500' },
-  { name: 'بطاقة Xbox', value: '50$ سعودي', price: 195, grad: 'from-green-600 to-emerald-800', badge: '', badgeColor: '' },
-  { name: 'بطاقة Steam', value: '50$ دولار', price: 189, grad: 'from-blue-500 to-cyan-700', badge: 'جديد', badgeColor: 'from-blue-500 to-cyan-400' },
-  { name: 'بطاقة Roblox', value: '800 Robux', price: 45, grad: 'from-red-500 to-orange-600', badge: '', badgeColor: '' },
-  { name: 'بطاقة Nintendo', value: '50$ دولار', price: 199, grad: 'from-red-600 to-pink-700', badge: '', badgeColor: '' },
-  { name: 'بطاقة PUBG', value: '3250 UC', price: 99, grad: 'from-yellow-600 to-amber-700', badge: 'عرض', badgeColor: 'from-orange-500 to-yellow-500' },
+  { name: 'بطاقة PlayStation', value: '50$ سعودي', price: 195, img: '/images/products/gaming/psn-card.png', badge: 'الأكثر مبيعاً', badgeColor: 'from-red-500 to-pink-500' },
+  { name: 'بطاقة Xbox', value: '50$ سعودي', price: 195, img: '/images/products/gaming/xbox-card.png', badge: '', badgeColor: '' },
+  { name: 'بطاقة Steam', value: '50$ دولار', price: 189, img: '/images/products/gaming/steam-card.png', badge: 'جديد', badgeColor: 'from-blue-500 to-cyan-400' },
+  { name: 'بطاقة Roblox', value: '800 Robux', price: 45, img: '/images/products/gaming/roblox-card.png', badge: '', badgeColor: '' },
+  { name: 'بطاقة Nintendo', value: '50$ دولار', price: 199, img: '/images/products/gaming/nintendo-card.png', badge: '', badgeColor: '' },
+  { name: 'بطاقة PUBG', value: '3250 UC', price: 99, img: '/images/products/gaming/pubg-card.png', badge: 'عرض', badgeColor: 'from-orange-500 to-yellow-500' },
 ];
 
 const topUpCards = [
@@ -51,12 +51,12 @@ const topUpCards = [
 ];
 
 const subscriptions = [
-  { name: 'Netflix', period: 'شهر', price: 39, grad: 'from-red-600 to-red-900', icon: '🎬' },
-  { name: 'Spotify', period: 'شهر', price: 25, grad: 'from-green-500 to-green-800', icon: '🎵' },
-  { name: 'YouTube Premium', period: 'شهر', price: 29, grad: 'from-red-500 to-red-800', icon: '▶️' },
-  { name: 'ChatGPT Plus', period: 'شهر', price: 89, grad: 'from-teal-500 to-teal-800', icon: '🤖' },
-  { name: 'Midjourney', period: 'شهر', price: 79, grad: 'from-purple-500 to-purple-800', icon: '🎨' },
-  { name: 'Canva Pro', period: 'شهر', price: 19, grad: 'from-blue-400 to-indigo-600', icon: '🖼️' },
+  { name: 'Netflix', period: 'شهر', price: 39, img: '/images/products/subscriptions/netflix-card.png' },
+  { name: 'Spotify', period: 'شهر', price: 25, img: '/images/products/subscriptions/spotify-card.png' },
+  { name: 'YouTube Premium', period: 'شهر', price: 29, img: '/images/products/subscriptions/youtube-card.png' },
+  { name: 'ChatGPT Plus', period: 'شهر', price: 89, img: '/images/products/subscriptions/chatgpt-card.png' },
+  { name: 'Midjourney', period: 'شهر', price: 79, img: '/images/products/subscriptions/midjourney-card.png' },
+  { name: 'Canva Pro', period: 'شهر', price: 19, img: '/images/products/subscriptions/canva-card.png' },
 ];
 
 const aiTools = [
@@ -152,9 +152,7 @@ export default function Home() {
                 {c.badge && (
                   <span className={`absolute -top-2 ${isAr ? 'right-3' : 'left-3'} bg-gradient-to-r ${c.badgeColor} text-white text-[10px] font-bold px-2 py-0.5 rounded-full z-10`}>{c.badge}</span>
                 )}
-                <div className={`w-full aspect-square rounded-xl ${c.grad} flex items-center justify-center mb-3 group-hover:scale-105 transition-transform`}>
-                  <Gamepad2 className="w-8 h-8 text-white/80" />
-                </div>
+                <img src={c.img} alt={c.name} className="w-full aspect-square rounded-xl object-cover mb-3 group-hover:scale-105 transition-transform" loading="lazy" />
                 <h3 className="text-white font-medium text-sm mb-1">{c.name}</h3>
                 <p className="text-gray-500 text-xs mb-2">{c.value}</p>
                 <p className="text-white font-bold">{c.price} ر.س</p>
@@ -194,9 +192,7 @@ export default function Home() {
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
             {subscriptions.map((s, i) => (
               <div key={i} className="group bg-[#151520] border border-white/[0.06] rounded-2xl p-4 hover:border-green-500/30 transition-all hover:-translate-y-1 cursor-pointer">
-                <div className={`w-full aspect-square rounded-xl ${s.grad} flex items-center justify-center mb-3 text-3xl group-hover:scale-105 transition-transform`}>
-                  {s.icon}
-                </div>
+                <img src={s.img} alt={s.name} className="w-full aspect-square rounded-xl object-cover mb-3 group-hover:scale-105 transition-transform" loading="lazy" />
                 <h3 className="text-white font-medium text-sm mb-1">{s.name}</h3>
                 <p className="text-gray-500 text-xs mb-2">{s.period}</p>
                 <p className="text-white font-bold">{s.price} ر.س<span className="text-gray-500 text-xs font-normal">/شهر</span></p>
