@@ -21,8 +21,8 @@ import PlatformServices from './pages/PlatformServices';
 import MarketingServices from './pages/MarketingServices';
 import Subscriptions from './pages/Subscriptions';
 import Payment from './pages/Payment';
-import Admin from './pages/Admin';
-import AdminDashboard from './pages/AdminDashboard';
+import AdminLayout from './admin/AdminLayout';
+import AdminPreview from './admin/AdminPreview';
 
 export default function App() {
   return (
@@ -46,8 +46,9 @@ export default function App() {
             <Route path="/marketing" element={<MarketingServices />} />
             <Route path="/subscriptions" element={<Subscriptions />} />
             <Route path="/payment" element={<Payment />} />
-            <Route path="/admin" element={<Admin />} />
-            <Route path="/admin/dashboard" element={<AdminDashboard />} />
+            <Route path="/admin" element={<AdminLayout />} />
+            <Route path="/admin/*" element={<AdminLayout />} />
+            <Route path="/admin-preview" element={<AdminPreview />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
           <Toaster />
