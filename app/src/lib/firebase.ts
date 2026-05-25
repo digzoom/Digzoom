@@ -1,19 +1,16 @@
-import { initializeApp } from 'firebase/app';
-import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged, type User } from 'firebase/auth';
+// Safe Firebase mock for static deployment
+export const auth = null as any;
+export const googleProvider = null as any;
 
-const firebaseConfig = {
-  apiKey: "AIzaSyDigZoomDemoKey12345",
-  authDomain: "digzoom-auth.firebaseapp.com",
-  projectId: "digzoom-auth",
-  storageBucket: "digzoom-auth.appspot.com",
-  messagingSenderId: "123456789",
-  appId: "1:123456789:web:abcdef123456"
+export const signInWithGoogle = async () => {
+  console.warn('Firebase not available in static mode');
 };
 
-const app = initializeApp(firebaseConfig);
-export const auth = getAuth(app);
-export const googleProvider = new GoogleAuthProvider();
+export const logout = async () => {};
 
-export const signInWithGoogle = () => signInWithPopup(auth, googleProvider);
-export const logout = () => signOut(auth);
-export { onAuthStateChanged, type User };
+export const onAuthStateChanged = (_auth: any, callback: (user: any) => void) => {
+  callback(null);
+  return () => {};
+};
+
+export type User = any;
