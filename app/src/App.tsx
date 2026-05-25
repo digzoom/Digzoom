@@ -3,6 +3,7 @@ import { Toaster } from '@/components/ui/sonner';
 import { LanguageProvider } from '@/hooks/useLanguage.tsx';
 import { CartProvider } from '@/hooks/useCart.tsx';
 import { AuthProvider } from '@/hooks/useAuth.tsx';
+import ChatBot from '@/components/ChatBot';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import NotFound from './pages/NotFound';
@@ -19,6 +20,8 @@ import PlatformServices from './pages/PlatformServices';
 import MarketingServices from './pages/MarketingServices';
 import Subscriptions from './pages/Subscriptions';
 import Payment from './pages/Payment';
+import Admin from './pages/Admin';
+import AdminDashboard from './pages/AdminDashboard';
 
 export default function App() {
   return (
@@ -42,9 +45,12 @@ export default function App() {
             <Route path="/marketing" element={<MarketingServices />} />
             <Route path="/subscriptions" element={<Subscriptions />} />
             <Route path="/payment" element={<Payment />} />
+            <Route path="/admin" element={<Admin />} />
+            <Route path="/admin/dashboard" element={<AdminDashboard />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
           <Toaster />
+          <ChatBot />
         </AuthProvider>
       </CartProvider>
     </LanguageProvider>
