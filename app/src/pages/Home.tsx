@@ -42,12 +42,12 @@ const gamingCards = [
 ];
 
 const topUpCards = [
-  { name: 'شحن رصيد STC', value: '20 ر.س', price: 20, grad: 'from-purple-600 to-indigo-700' },
-  { name: 'شحن رصيد Mobily', value: '25 ر.س', price: 25, grad: 'from-green-600 to-teal-700' },
-  { name: 'شحن رصيد Zain', value: '20 ر.س', price: 20, grad: 'from-blue-600 to-cyan-700' },
-  { name: 'شحن جواهر فري فاير', value: '100 جوهرة', price: 9, grad: 'from-orange-500 to-red-600' },
-  { name: 'شحن كوينز FIFA', value: '500 نقطة', price: 29, grad: 'from-blue-500 to-purple-600' },
-  { name: 'شحن شدات ببجي', value: '60 UC', price: 12, grad: 'from-yellow-500 to-orange-600' },
+  { name: 'شحن رصيد STC', value: '20 ر.س', price: 20, img: '/images/products/topup/stc-card.png' },
+  { name: 'شحن رصيد Mobily', value: '25 ر.س', price: 25, img: '/images/products/topup/mobily-card.png' },
+  { name: 'شحن رصيد Zain', value: '20 ر.س', price: 20, img: '/images/products/topup/zain-card.png' },
+  { name: 'شحن جواهر فري فاير', value: '100 جوهرة', price: 9, img: '/images/products/topup/freefire-card.png' },
+  { name: 'شحن كوينز FIFA', value: '500 نقطة', price: 29, img: '/images/products/topup/fifa-card.png' },
+  { name: 'شحن شدات ببجي', value: '60 UC', price: 12, img: '/images/products/topup/pubg-uc-card.png' },
 ];
 
 const subscriptions = [
@@ -60,12 +60,12 @@ const subscriptions = [
 ];
 
 const aiTools = [
-  { name: 'حساب ChatGPT', desc: 'وصول كامل لـ GPT-4', price: 89, grad: 'from-teal-500 to-emerald-600' },
-  { name: 'حساب Claude', desc: 'وصول لـ Claude 3 Opus', price: 79, grad: 'from-orange-500 to-amber-600' },
-  { name: 'حساب Gemini', desc: 'وصول لـ Gemini Advanced', price: 69, grad: 'from-blue-500 to-indigo-600' },
-  { name: 'حساب Jasper', desc: 'كتابة محتوى بـ AI', price: 59, grad: 'from-pink-500 to-rose-600' },
-  { name: 'حساب Copy.ai', desc: 'نسخ إعلاني ذكي', price: 49, grad: 'from-violet-500 to-purple-600' },
-  { name: 'حساب Grammarly', desc: 'تصحيح إملائي متقدم', price: 35, grad: 'from-green-500 to-emerald-600' },
+  { name: 'حساب ChatGPT', desc: 'وصول كامل لـ GPT-4', price: 89, img: '/images/products/ai/chatgpt-card.png' },
+  { name: 'حساب Claude', desc: 'وصول لـ Claude 3 Opus', price: 79, img: '/images/products/ai/claude-card.png' },
+  { name: 'حساب Gemini', desc: 'وصول لـ Gemini Advanced', price: 69, img: '/images/products/ai/gemini-card.png' },
+  { name: 'حساب Jasper', desc: 'كتابة محتوى بـ AI', price: 59, img: '/images/products/ai/jasper-card.png' },
+  { name: 'حساب Copy.ai', desc: 'نسخ إعلاني ذكي', price: 49, img: '/images/products/ai/copyai-card.png' },
+  { name: 'حساب Grammarly', desc: 'تصحيح إملائي متقدم', price: 35, img: '/images/products/ai/grammarly-card.png' },
 ];
 
 const digitalServices = [
@@ -171,9 +171,7 @@ export default function Home() {
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
             {topUpCards.map((c, i) => (
               <div key={i} className="group bg-[#151520] border border-white/[0.06] rounded-2xl p-4 hover:border-purple-500/30 transition-all hover:-translate-y-1 cursor-pointer">
-                <div className={`w-full aspect-square rounded-xl ${c.grad} flex items-center justify-center mb-3 group-hover:scale-105 transition-transform`}>
-                  <Phone className="w-8 h-8 text-white/80" />
-                </div>
+                <img src={c.img} alt={c.name} className="w-full aspect-square rounded-xl object-cover mb-3 group-hover:scale-105 transition-transform" loading="lazy" />
                 <h3 className="text-white font-medium text-sm mb-1">{c.name}</h3>
                 <p className="text-gray-500 text-xs mb-2">{c.value}</p>
                 <p className="text-white font-bold">{c.price} ر.س</p>
@@ -211,9 +209,7 @@ export default function Home() {
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
             {aiTools.map((t, i) => (
               <div key={i} className="group bg-[#151520] border border-white/[0.06] rounded-2xl p-4 hover:border-teal-500/30 transition-all hover:-translate-y-1 cursor-pointer">
-                <div className={`w-full aspect-square rounded-xl ${t.grad} flex items-center justify-center mb-3 group-hover:scale-105 transition-transform`}>
-                  <Wand2 className="w-8 h-8 text-white/80" />
-                </div>
+                <img src={t.img} alt={t.name} className="w-full aspect-square rounded-xl object-cover mb-3 group-hover:scale-105 transition-transform" loading="lazy" />
                 <h3 className="text-white font-medium text-sm mb-1">{t.name}</h3>
                 <p className="text-gray-500 text-xs mb-2">{t.desc}</p>
                 <p className="text-white font-bold">{t.price} ر.س<span className="text-gray-500 text-xs font-normal">/شهر</span></p>
