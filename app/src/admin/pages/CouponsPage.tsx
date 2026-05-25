@@ -139,9 +139,13 @@ export default function CouponsPage() {
           <div key={c.id} className={`bg-[#151520] border rounded-2xl p-5 transition-all hover:-translate-y-1 ${c.status === 'active' ? 'border-green-500/20' : c.status === 'expired' ? 'border-gray-500/20 opacity-60' : 'border-yellow-500/20'}`}>
             <div className="flex items-center justify-between mb-3">
               <span className="text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">{c.code}</span>
-              <div className="flex items-center gap-1">
-                <button onClick={() => openEdit(c)} className="p-1.5 rounded-lg text-gray-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors"><Edit3 className="w-3.5 h-3.5" /></button>
-                <button onClick={() => handleDelete(c.id)} className="p-1.5 rounded-lg text-gray-400 hover:text-red-400 hover:bg-red-500/10 transition-colors"><Trash2 className="w-3.5 h-3.5" /></button>
+              <div className="flex items-center gap-2">
+                <button onClick={() => openEdit(c)} title="تعديل" className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-blue-500/10 text-blue-400 hover:bg-blue-500/20 hover:text-blue-300 transition-colors text-xs font-medium">
+                  <Edit3 className="w-3.5 h-3.5" /> تعديل
+                </button>
+                <button onClick={() => handleDelete(c.id)} title="حذف" className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-red-500/10 text-red-400 hover:bg-red-500/20 hover:text-red-300 transition-colors text-xs font-medium">
+                  <Trash2 className="w-3.5 h-3.5" /> حذف
+                </button>
               </div>
             </div>
             <div className="flex items-center gap-4 mb-3">

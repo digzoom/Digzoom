@@ -12,6 +12,7 @@ import CouponsPage from './pages/CouponsPage';
 import AnalyticsPage from './pages/AnalyticsPage';
 import NotificationsPage from './pages/NotificationsPage';
 import LogsPage from './pages/LogsPage';
+import UsersPage from './pages/UsersPage';
 import SettingsPage from './pages/SettingsPage';
 
 export default function AdminLayout() {
@@ -31,6 +32,7 @@ export default function AdminLayout() {
     analytics: <AnalyticsPage />,
     notifications: <NotificationsPage />,
     logs: <LogsPage />,
+    users: <UsersPage />,
     roles: <SettingsPage />,
     settings: <SettingsPage />,
   };
@@ -66,6 +68,7 @@ export default function AdminLayout() {
               {activePage === 'analytics' && 'الأرباح'}
               {activePage === 'notifications' && 'الإشعارات'}
               {activePage === 'logs' && 'سجل العمليات'}
+              {activePage === 'users' && 'المستخدمين'}
               {activePage === 'roles' && 'الصلاحيات'}
               {activePage === 'settings' && 'الإعدادات'}
             </span>

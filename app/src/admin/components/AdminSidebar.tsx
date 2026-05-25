@@ -3,7 +3,7 @@ import {
   LayoutDashboard, ShoppingCart, Package, Users, KeyRound,
   Truck, Share2, CreditCard, Sparkles, BarChart3, Bell,
   Settings, ShieldCheck, ScrollText, LogOut, ChevronRight,
-  ChevronLeft, Zap
+  ChevronLeft, Zap, UserCog
 } from 'lucide-react';
 
 const menuItems = [
@@ -19,6 +19,7 @@ const menuItems = [
   { id: 'analytics', label: 'الأرباح', icon: BarChart3 },
   { id: 'notifications', label: 'الإشعارات', icon: Bell, badge: 3 },
   { id: 'logs', label: 'سجل العمليات', icon: ScrollText },
+  { id: 'users', label: 'المستخدمين', icon: UserCog },
   { id: 'roles', label: 'الصلاحيات', icon: ShieldCheck },
   { id: 'settings', label: 'الإعدادات', icon: Settings },
 ];

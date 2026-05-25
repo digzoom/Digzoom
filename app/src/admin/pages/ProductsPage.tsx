@@ -45,6 +45,27 @@ export default function ProductsPage() {
   const [form, setForm] = useState({
     name: '', category: 'gaming', price: '', cost: '', stock: '', status: 'active' as 'active' | 'inactive', image: '',
   });
+  const [previewImage, setPreviewImage] = useState('');
+
+  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    if (!file.type.startsWith('image/')) {
+      setToast({ msg: 'يرجى اختيار ملف صورة فقط', type: 'error' });
+      return;
+    }
+    if (file.size > 5 * 1024 * 1024) {
+      setToast({ msg: 'حجم الصورة يجب أن يكون أقل من 5 ميجا', type: 'error' });
+      return;
+    }
+    const reader = new FileReader();
+    reader.onload = (ev) => {
+      const result = ev.target?.result as string;
+      setPreviewImage(result);
+      setForm(p => ({ ...p, image: result }));
+    };
+    reader.readAsDataURL(file);
+  };
 
   useEffect(() => { localStorage.setItem(LS_KEY, JSON.stringify(products)); }, [products]);
   useEffect(() => { if (toast) { const t = setTimeout(() => setToast(null), 3000); return () => clearTimeout(t); } }, [toast]);
@@ -57,6 +78,7 @@ export default function ProductsPage() {
 
   const resetForm = () => {
     setForm({ name: '', category: 'gaming', price: '', cost: '', stock: '', status: 'active', image: '' });
+    setPreviewImage('');
     setEditingId(null);
   };
 
@@ -64,6 +86,7 @@ export default function ProductsPage() {
 
   const openEdit = (p: Product) => {
     setForm({ name: p.name, category: p.category, price: String(p.price), cost: String(p.cost), stock: String(p.stock), status: p.status, image: p.image });
+    setPreviewImage(p.image || '');
     setEditingId(p.id);
     setShowForm(true);
   };
@@ -256,8 +279,16 @@ export default function ProductsPage() {
                 <input type="number" value={form.stock} onChange={e => setForm(p => ({ ...p, stock: e.target.value }))} className="w-full bg-black/30 border border-white/10 rounded-xl px-4 py-2.5 text-white text-sm" />
               </div>
               <div>
-                <label className="text-gray-400 text-sm block mb-2">رابط الصورة</label>
-                <input value={form.image} onChange={e => setForm(p => ({ ...p, image: e.target.value }))} placeholder="/images/products/..." className="w-full bg-black/30 border border-white/10 rounded-xl px-4 py-2.5 text-white text-sm" dir="ltr" />
+                <label className="text-gray-400 text-sm block mb-2">الصورة</label>
+                <div className="flex items-center gap-3">
+                  {previewImage && <img src={previewImage} alt="" className="w-16 h-16 rounded-xl object-cover bg-gray-800 border border-white/10" />}
+                  <label className="flex-1 cursor-pointer bg-black/30 border border-dashed border-white/20 rounded-xl px-4 py-3 text-center hover:border-blue-500/40 hover:bg-blue-500/5 transition-all">
+                    <span className="text-gray-400 text-sm">
+                      {previewImage ? 'تغيير الصورة' : 'اضغط لرفع صورة من الجهاز'}
+                    </span>
+                    <input type="file" accept="image/*" className="hidden" onChange={handleImageUpload} />
+                  </label>
+                </div>
               </div>
             </div>
             <div className="flex gap-3 mt-6">
