@@ -4,6 +4,7 @@ import { LanguageProvider } from '@/hooks/useLanguage.tsx';
 import { CartProvider } from '@/hooks/useCart.tsx';
 import { AuthProvider } from '@/hooks/useAuth.tsx';
 import ChatBot from '@/components/ChatBot';
+// v2.1 - Admin + ChatBot + Coupons enabled
 import Home from './pages/Home';
 import Login from './pages/Login';
 import NotFound from './pages/NotFound';
