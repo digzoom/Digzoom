@@ -3,9 +3,10 @@ import { Link } from 'react-router';
 import {
   ShoppingBag, Gamepad2, Phone, Wand2, Briefcase,
   Star, Sparkles, Gift, ChevronRight, Percent,
-  Zap, Lock, MessageCircle, Tag
+  Zap, Lock, MessageCircle, Tag, Plus
 } from 'lucide-react';
 import { useLanguage } from '@/hooks/useLanguage';
+import { useCart } from '@/hooks/useCart';
 
 // ─── old components ───
 import Navbar from '@/components/Navbar';
@@ -33,39 +34,39 @@ const trustBlocks = [
 ];
 
 const gamingCards = [
-  { name: 'بطاقة PlayStation', value: '50$ سعودي', price: 195, img: '/images/products/gaming/psn-card.png', badge: 'الأكثر مبيعاً', badgeColor: 'from-red-500 to-pink-500' },
-  { name: 'بطاقة Xbox', value: '50$ سعودي', price: 195, img: '/images/products/gaming/xbox-card.png', badge: '', badgeColor: '' },
-  { name: 'بطاقة Steam', value: '50$ دولار', price: 189, img: '/images/products/gaming/steam-card.png', badge: 'جديد', badgeColor: 'from-blue-500 to-cyan-400' },
-  { name: 'بطاقة Roblox', value: '800 Robux', price: 45, img: '/images/products/gaming/roblox-card.png', badge: '', badgeColor: '' },
-  { name: 'بطاقة Nintendo', value: '50$ دولار', price: 199, img: '/images/products/gaming/nintendo-card.png', badge: '', badgeColor: '' },
-  { name: 'بطاقة PUBG', value: '3250 UC', price: 99, img: '/images/products/gaming/pubg-card.png', badge: 'عرض', badgeColor: 'from-orange-500 to-yellow-500' },
+  { id: 101, name: 'بطاقة PlayStation', value: '50$ سعودي', price: 195, img: '/images/products/gaming/psn-card.png', badge: 'الأكثر مبيعاً', badgeColor: 'from-red-500 to-pink-500' },
+  { id: 102, name: 'بطاقة Xbox', value: '50$ سعودي', price: 195, img: '/images/products/gaming/xbox-card.png', badge: '', badgeColor: '' },
+  { id: 103, name: 'بطاقة Steam', value: '50$ دولار', price: 189, img: '/images/products/gaming/steam-card.png', badge: 'جديد', badgeColor: 'from-blue-500 to-cyan-400' },
+  { id: 104, name: 'بطاقة Roblox', value: '800 Robux', price: 45, img: '/images/products/gaming/roblox-card.png', badge: '', badgeColor: '' },
+  { id: 105, name: 'بطاقة Nintendo', value: '50$ دولار', price: 199, img: '/images/products/gaming/nintendo-card.png', badge: '', badgeColor: '' },
+  { id: 106, name: 'بطاقة PUBG', value: '3250 UC', price: 99, img: '/images/products/gaming/pubg-card.png', badge: 'عرض', badgeColor: 'from-orange-500 to-yellow-500' },
 ];
 
 const topUpCards = [
-  { name: 'شحن رصيد STC', value: '20 ر.س', price: 20, img: '/images/products/topup/stc-card.png' },
-  { name: 'شحن رصيد Mobily', value: '25 ر.س', price: 25, img: '/images/products/topup/mobily-card.png' },
-  { name: 'شحن رصيد Zain', value: '20 ر.س', price: 20, img: '/images/products/topup/zain-card.png' },
-  { name: 'شحن جواهر فري فاير', value: '100 جوهرة', price: 9, img: '/images/products/topup/freefire-card.png' },
-  { name: 'شحن كوينز FIFA', value: '500 نقطة', price: 29, img: '/images/products/topup/fifa-card.png' },
-  { name: 'شحن شدات ببجي', value: '60 UC', price: 12, img: '/images/products/topup/pubg-uc-card.png' },
+  { id: 201, name: 'شحن رصيد STC', value: '20 ر.س', price: 20, img: '/images/products/topup/stc-card.png' },
+  { id: 202, name: 'شحن رصيد Mobily', value: '25 ر.س', price: 25, img: '/images/products/topup/mobily-card.png' },
+  { id: 203, name: 'شحن رصيد Zain', value: '20 ر.س', price: 20, img: '/images/products/topup/zain-card.png' },
+  { id: 204, name: 'شحن جواهر فري فاير', value: '100 جوهرة', price: 9, img: '/images/products/topup/freefire-card.png' },
+  { id: 205, name: 'شحن كوينز FIFA', value: '500 نقطة', price: 29, img: '/images/products/topup/fifa-card.png' },
+  { id: 206, name: 'شحن شدات ببجي', value: '60 UC', price: 12, img: '/images/products/topup/pubg-uc-card.png' },
 ];
 
 const subscriptions = [
-  { name: 'Netflix', period: 'شهر', price: 39, img: '/images/products/subscriptions/netflix-card.png' },
-  { name: 'Spotify', period: 'شهر', price: 25, img: '/images/products/subscriptions/spotify-card.png' },
-  { name: 'YouTube Premium', period: 'شهر', price: 29, img: '/images/products/subscriptions/youtube-card.png' },
-  { name: 'ChatGPT Plus', period: 'شهر', price: 89, img: '/images/products/subscriptions/chatgpt-card.png' },
-  { name: 'Midjourney', period: 'شهر', price: 79, img: '/images/products/subscriptions/midjourney-card.png' },
-  { name: 'Canva Pro', period: 'شهر', price: 19, img: '/images/products/subscriptions/canva-card.png' },
+  { id: 301, name: 'Netflix', period: 'شهر', price: 39, img: '/images/products/subscriptions/netflix-card.png' },
+  { id: 302, name: 'Spotify', period: 'شهر', price: 25, img: '/images/products/subscriptions/spotify-card.png' },
+  { id: 303, name: 'YouTube Premium', period: 'شهر', price: 29, img: '/images/products/subscriptions/youtube-card.png' },
+  { id: 304, name: 'ChatGPT Plus', period: 'شهر', price: 89, img: '/images/products/subscriptions/chatgpt-card.png' },
+  { id: 305, name: 'Midjourney', period: 'شهر', price: 79, img: '/images/products/subscriptions/midjourney-card.png' },
+  { id: 306, name: 'Canva Pro', period: 'شهر', price: 19, img: '/images/products/subscriptions/canva-card.png' },
 ];
 
 const aiTools = [
-  { name: 'حساب ChatGPT', desc: 'وصول كامل لـ GPT-4', price: 89, img: '/images/products/ai/chatgpt-card.png' },
-  { name: 'حساب Claude', desc: 'وصول لـ Claude 3 Opus', price: 79, img: '/images/products/ai/claude-card.png' },
-  { name: 'حساب Gemini', desc: 'وصول لـ Gemini Advanced', price: 69, img: '/images/products/ai/gemini-card.png' },
-  { name: 'حساب Jasper', desc: 'كتابة محتوى بـ AI', price: 59, img: '/images/products/ai/jasper-card.png' },
-  { name: 'حساب Copy.ai', desc: 'نسخ إعلاني ذكي', price: 49, img: '/images/products/ai/copyai-card.png' },
-  { name: 'حساب Grammarly', desc: 'تصحيح إملائي متقدم', price: 35, img: '/images/products/ai/grammarly-card.png' },
+  { id: 401, name: 'حساب ChatGPT', desc: 'وصول كامل لـ GPT-4', price: 89, img: '/images/products/ai/chatgpt-card.png' },
+  { id: 402, name: 'حساب Claude', desc: 'وصول لـ Claude 3 Opus', price: 79, img: '/images/products/ai/claude-card.png' },
+  { id: 403, name: 'حساب Gemini', desc: 'وصول لـ Gemini Advanced', price: 69, img: '/images/products/ai/gemini-card.png' },
+  { id: 404, name: 'حساب Jasper', desc: 'كتابة محتوى بـ AI', price: 59, img: '/images/products/ai/jasper-card.png' },
+  { id: 405, name: 'حساب Copy.ai', desc: 'نسخ إعلاني ذكي', price: 49, img: '/images/products/ai/copyai-card.png' },
+  { id: 406, name: 'حساب Grammarly', desc: 'تصحيح إملائي متقدم', price: 35, img: '/images/products/ai/grammarly-card.png' },
 ];
 
 const digitalServices = [
@@ -148,15 +149,18 @@ export default function Home() {
             subtitle="PlayStation، Xbox، Steam، Roblox، Nintendo وغيرها — صور حقيقية 100%" />
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
             {gamingCards.map((c, i) => (
-              <div key={i} className="group relative bg-[#151520] border border-white/[0.06] rounded-2xl p-4 hover:border-blue-500/30 transition-all hover:-translate-y-1 cursor-pointer">
+              <Link key={i} to={`/product/${c.id}`} state={{ product: { id: c.id, title: c.name, description: c.value, longDescription: c.name + ' - ' + c.value, price: c.price, image: c.img, category: 'gaming', rating: 4.8, reviews: 120, features: ['تسليم فوري', 'ضمان 30 يوم'], fileType: 'رقمي', fileSize: '-', inStock: true } }} className="group relative bg-[#151520] border border-white/[0.06] rounded-2xl p-4 hover:border-blue-500/30 transition-all hover:-translate-y-1">
                 {c.badge && (
                   <span className={`absolute -top-2 ${isAr ? 'right-3' : 'left-3'} bg-gradient-to-r ${c.badgeColor} text-white text-[10px] font-bold px-2 py-0.5 rounded-full z-10`}>{c.badge}</span>
                 )}
                 <img src={c.img} alt={c.name} className="w-full aspect-square rounded-xl object-cover mb-3 group-hover:scale-105 transition-transform" loading="lazy" />
                 <h3 className="text-white font-medium text-sm mb-1">{c.name}</h3>
                 <p className="text-gray-500 text-xs mb-2">{c.value}</p>
-                <p className="text-white font-bold">{c.price} ر.س</p>
-              </div>
+                <div className="flex items-center justify-between">
+                  <p className="text-white font-bold">{c.price} ر.س</p>
+                  <span className="opacity-0 group-hover:opacity-100 transition-opacity bg-blue-600 text-white text-[10px] px-2 py-1 rounded-full">شراء</span>
+                </div>
+              </Link>
             ))}
           </div>
         </div>
@@ -170,12 +174,15 @@ export default function Home() {
             subtitle="شحن لجميع الشبكات والألعاب بشكل فوري وآمن" />
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
             {topUpCards.map((c, i) => (
-              <div key={i} className="group bg-[#151520] border border-white/[0.06] rounded-2xl p-4 hover:border-purple-500/30 transition-all hover:-translate-y-1 cursor-pointer">
+              <Link key={i} to={`/product/${c.id}`} state={{ product: { id: c.id, title: c.name, description: c.value, longDescription: c.name + ' - ' + c.value, price: c.price, image: c.img, category: 'topup', rating: 4.7, reviews: 85, features: ['شحن فوري', 'تسليم خلال دقائق'], fileType: 'رقمي', fileSize: '-', inStock: true } }} className="group bg-[#151520] border border-white/[0.06] rounded-2xl p-4 hover:border-purple-500/30 transition-all hover:-translate-y-1">
                 <img src={c.img} alt={c.name} className="w-full aspect-square rounded-xl object-cover mb-3 group-hover:scale-105 transition-transform" loading="lazy" />
                 <h3 className="text-white font-medium text-sm mb-1">{c.name}</h3>
                 <p className="text-gray-500 text-xs mb-2">{c.value}</p>
-                <p className="text-white font-bold">{c.price} ر.س</p>
-              </div>
+                <div className="flex items-center justify-between">
+                  <p className="text-white font-bold">{c.price} ر.س</p>
+                  <span className="opacity-0 group-hover:opacity-100 transition-opacity bg-purple-600 text-white text-[10px] px-2 py-1 rounded-full">شراء</span>
+                </div>
+              </Link>
             ))}
           </div>
         </div>
@@ -189,12 +196,15 @@ export default function Home() {
             subtitle="Netflix، Spotify، YouTube Premium، ChatGPT Plus وغيرها" />
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
             {subscriptions.map((s, i) => (
-              <div key={i} className="group bg-[#151520] border border-white/[0.06] rounded-2xl p-4 hover:border-green-500/30 transition-all hover:-translate-y-1 cursor-pointer">
+              <Link key={i} to={`/product/${s.id}`} state={{ product: { id: s.id, title: 'اشتراك ' + s.name, description: s.period, longDescription: 'اشتراك ' + s.name + ' لمدة ' + s.period, price: s.price, image: s.img, category: 'subscription', rating: 4.9, reviews: 200, features: ['تفعيل فوري', 'ضمان استمرارية'], fileType: 'رقمي', fileSize: '-', inStock: true } }} className="group bg-[#151520] border border-white/[0.06] rounded-2xl p-4 hover:border-green-500/30 transition-all hover:-translate-y-1">
                 <img src={s.img} alt={s.name} className="w-full aspect-square rounded-xl object-cover mb-3 group-hover:scale-105 transition-transform" loading="lazy" />
                 <h3 className="text-white font-medium text-sm mb-1">{s.name}</h3>
                 <p className="text-gray-500 text-xs mb-2">{s.period}</p>
-                <p className="text-white font-bold">{s.price} ر.س<span className="text-gray-500 text-xs font-normal">/شهر</span></p>
-              </div>
+                <div className="flex items-center justify-between">
+                  <p className="text-white font-bold">{s.price} ر.س<span className="text-gray-500 text-xs font-normal">/شهر</span></p>
+                  <span className="opacity-0 group-hover:opacity-100 transition-opacity bg-green-600 text-white text-[10px] px-2 py-1 rounded-full">شراء</span>
+                </div>
+              </Link>
             ))}
           </div>
         </div>
@@ -208,12 +218,15 @@ export default function Home() {
             subtitle="وصول كامل لأقوى أدوات AI في العالم" />
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
             {aiTools.map((t, i) => (
-              <div key={i} className="group bg-[#151520] border border-white/[0.06] rounded-2xl p-4 hover:border-teal-500/30 transition-all hover:-translate-y-1 cursor-pointer">
+              <Link key={i} to={`/product/${t.id}`} state={{ product: { id: t.id, title: t.name, description: t.desc, longDescription: t.name + ' - ' + t.desc, price: t.price, image: t.img, category: 'ai', rating: 4.9, reviews: 150, features: ['وصول كامل', 'تفعيل فوري'], fileType: 'رقمي', fileSize: '-', inStock: true } }} className="group bg-[#151520] border border-white/[0.06] rounded-2xl p-4 hover:border-teal-500/30 transition-all hover:-translate-y-1">
                 <img src={t.img} alt={t.name} className="w-full aspect-square rounded-xl object-cover mb-3 group-hover:scale-105 transition-transform" loading="lazy" />
                 <h3 className="text-white font-medium text-sm mb-1">{t.name}</h3>
                 <p className="text-gray-500 text-xs mb-2">{t.desc}</p>
-                <p className="text-white font-bold">{t.price} ر.س<span className="text-gray-500 text-xs font-normal">/شهر</span></p>
-              </div>
+                <div className="flex items-center justify-between">
+                  <p className="text-white font-bold">{t.price} ر.س<span className="text-gray-500 text-xs font-normal">/شهر</span></p>
+                  <span className="opacity-0 group-hover:opacity-100 transition-opacity bg-teal-600 text-white text-[10px] px-2 py-1 rounded-full">شراء</span>
+                </div>
+              </Link>
             ))}
           </div>
         </div>
