@@ -1,5 +1,5 @@
 import { Link } from 'react-router';
-import { Star, ShoppingCart, ArrowLeft } from 'lucide-react';
+import { Star, ShoppingCart, ArrowLeft, Eye } from 'lucide-react';
 import { useProducts } from '@/hooks/useProducts';
 import { useCart } from '@/hooks/useCart';
 import { useLanguage } from '@/hooks/useLanguage';
@@ -39,57 +39,69 @@ export default function FeaturedProducts() {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {displayFeatured.map((product) => (
-            <div
-              key={product.id}
-              className="group bg-[#1a1a2e] rounded-2xl border border-white/5 overflow-hidden hover:border-blue-500/20 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-blue-500/5"
-            >
-              <Link to={`/product/${product.id}`} className="block relative">
-                <div className="aspect-[3/4] overflow-hidden">
-                  <img
-                    src={product.image}
-                    alt={product.title}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
-                </div>
-                {product.originalPrice && (
-                  <div className="absolute top-3 left-3 bg-gradient-to-r from-red-500 to-pink-500 text-white text-xs font-bold px-3 py-1 rounded-full">
-                    {isRTL ? 'خصم' : 'Save'} {Math.round((1 - product.price / product.originalPrice) * 100)}%
-                  </div>
-                )}
-              </Link>
+          {displayFeatured.map((product) => {
+            const discount = product.originalPrice
+              ? Math.round((1 - product.price / product.originalPrice) * 100)
+              : 0;
 
-              <div className="p-5">
-                <Link to={`/product/${product.id}`}>
-                  <h3 className="text-white font-semibold mb-2 line-clamp-2 group-hover:text-blue-400 transition-colors">
-                    {product.title}
-                  </h3>
+            return (
+              <div
+                key={product.id}
+                className="group bg-[#1a1a2e] rounded-2xl border border-white/5 overflow-hidden hover:border-blue-500/20 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-blue-500/5"
+              >
+                <Link to={`/product/${product.id}`} className="block relative">
+                  <div className="aspect-[3/4] overflow-hidden">
+                    <img
+                      src={product.image}
+                      alt={product.title}
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                  </div>
+                  {discount > 0 && (
+                    <div className="absolute top-3 left-3 bg-gradient-to-r from-red-500 to-pink-500 text-white text-xs font-bold px-3 py-1 rounded-full">
+                      {isRTL ? 'خصم' : 'Save'} {discount}%
+                    </div>
+                  )}
                 </Link>
 
-                <div className="flex items-center gap-1 mb-3">
-                  <Star className="w-4 h-4 text-yellow-400 fill-yellow-400" />
-                  <span className="text-gray-300 text-sm">{product.rating}</span>
-                  <span className="text-gray-500 text-sm">({product.reviews})</span>
-                </div>
+                <div className="p-5">
+                  <Link to={`/product/${product.id}`}>
+                    <h3 className="text-white font-semibold mb-2 line-clamp-2 group-hover:text-blue-400 transition-colors">
+                      {product.title}
+                    </h3>
+                  </Link>
 
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <span className="text-xl font-bold text-white">{product.price} {t.featured.currency}</span>
-                    {product.originalPrice && (
-                      <span className="text-sm text-gray-500 line-through">{product.originalPrice}</span>
-                    )}
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className="flex items-center gap-1">
+                      <Star className="w-4 h-4 text-yellow-400 fill-yellow-400" />
+                      <span className="text-gray-300 text-sm">{product.rating}</span>
+                    </div>
+                    <span className="text-gray-600 text-sm">({product.reviews} {isRTL ? 'تقييم' : 'reviews'})</span>
+                    <div className="flex items-center gap-1 text-emerald-400 text-xs">
+                      <Eye className="w-3 h-3" />
+                      <span>{(product.reviews * 12 + 150).toLocaleString()}</span>
+                    </div>
                   </div>
-                  <Button
-                    size="icon"
-                    onClick={() => handleAdd(product)}
-                    className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 rounded-xl w-10 h-10"
-                  >
-                    <ShoppingCart className="w-4 h-4" />
-                  </Button>
+
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <span className="text-xl font-bold text-white">{product.price} {t.featured.currency}</span>
+                      {product.originalPrice && (
+                        <span className="text-sm text-gray-500 line-through">{product.originalPrice}</span>
+                      )}
+                    </div>
+                    <Button
+                      size="icon"
+                      onClick={() => handleAdd(product)}
+                      className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 rounded-xl w-10 h-10"
+                    >
+                      <ShoppingCart className="w-4 h-4" />
+                    </Button>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
         <div className="mt-8 text-center sm:hidden">
