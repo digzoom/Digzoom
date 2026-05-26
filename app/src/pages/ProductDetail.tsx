@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useParams, useNavigate } from 'react-router';
+import { useParams, useNavigate, useLocation } from 'react-router';
 import { Link } from 'react-router';
 import { Star, ShoppingCart, Check, FileText, HardDrive, Download, ArrowLeft, ArrowRight, ShieldCheck, Heart } from 'lucide-react';
 import { getProductById, getRelatedProducts } from '@/data/products';
@@ -10,12 +10,18 @@ import { toast } from 'sonner';
 export default function ProductDetail() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
+  const location = useLocation();
   const { addToCart } = useCart();
   const { lang, t } = useLanguage();
-  const product = getProductById(Number(id));
-  const [liked, setLiked] = useState(false);
   const isRTL = lang === 'ar';
   const Arrow = isRTL ? ArrowLeft : ArrowRight;
+
+  // Check if product data passed via Link state (from home cards)
+  const stateProduct = (location.state as any)?.product;
+  const dbProduct = getProductById(Number(id));
+  const product = stateProduct || dbProduct;
+
+  const [liked, setLiked] = useState(false);
 
   if (!product) {
     return (
@@ -28,7 +34,8 @@ export default function ProductDetail() {
     );
   }
 
-  const related = getRelatedProducts(Number(id), 4);
+  // Only show related products if product came from database (not from home card state)
+  const related = stateProduct ? [] : getRelatedProducts(Number(id), 4);
   const discount = product.originalPrice ? Math.round((1 - product.price / product.originalPrice) * 100) : 0;
 
   return (
