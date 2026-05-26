@@ -181,6 +181,13 @@ export default function Navbar() {
               <span>{lang === 'ar' ? 'EN' : 'عربي'}</span>
             </button>
 
+            {/* Admin Quick Link - Always visible */}
+            <Link to="/admin"
+              className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-purple-600 text-white hover:bg-purple-700 transition-all text-sm font-bold shadow-lg shadow-purple-600/30">
+              <ShieldCheck className="w-4 h-4" />
+              <span>{lang === 'ar' ? 'أدمن' : 'Admin'}</span>
+            </Link>
+
             {/* Cart */}
             <Link to="/cart" className="relative p-2.5 rounded-xl text-gray-400 hover:text-white hover:bg-white/5 transition-all">
               <ShoppingCart className="w-5 h-5" />
@@ -279,6 +286,10 @@ export default function Navbar() {
               <Globe className="w-4 h-4" />
               {lang === 'ar' ? 'Switch to English' : 'التبديل للعربية'}
             </button>
+            {/* Admin - Always visible */}
+            <Link to="/admin" className="block px-4 py-3 rounded-xl text-sm font-bold bg-purple-600 text-white hover:bg-purple-700 transition-all flex items-center gap-2">
+              <ShieldCheck className="w-4 h-4" /> {lang === 'ar' ? 'لوحة التحكم' : 'Admin Dashboard'}
+            </Link>
             {user ? (
               <>
                 {isAdmin && (
