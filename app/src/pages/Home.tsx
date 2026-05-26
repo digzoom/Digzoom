@@ -70,18 +70,18 @@ const aiTools = [
 ];
 
 const digitalServices = [
-  { name: 'إنشاء موقع WordPress', desc: 'موقع كامل جاهز', price: 499, grad: 'from-blue-600 to-indigo-700', icon: <Briefcase className="w-6 h-6" /> },
-  { name: 'تصميم لوجو احترافي', desc: '3 تصاميم + الملفات', price: 299, grad: 'from-purple-600 to-pink-700', icon: <Sparkles className="w-6 h-6" /> },
-  { name: 'إدارة سوشال ميديا', desc: 'إدارة كاملة لشهر', price: 599, grad: 'from-orange-500 to-red-600', icon: <MessageCircle className="w-6 h-6" /> },
-  { name: 'كتابة محتوى SEO', desc: '10 مقالات احترافية', price: 349, grad: 'from-green-600 to-teal-700', icon: <Tag className="w-6 h-6" /> },
-  { name: 'إعداد متجر إلكتروني', desc: 'متجر Shopify كامل', price: 899, grad: 'from-cyan-600 to-blue-700', icon: <ShoppingBag className="w-6 h-6" /> },
-  { name: 'تصميم هوية بصرية', desc: 'شعار + ألوان + خطوط', price: 399, grad: 'from-rose-600 to-pink-700', icon: <Star className="w-6 h-6" /> },
+  { id: 501, name: 'إنشاء موقع WordPress', desc: 'موقع كامل جاهز', price: 499, grad: 'from-blue-600 to-indigo-700', icon: <Briefcase className="w-6 h-6" />, features: ['تصميم احترافي', ' responsive', 'SEO جاهز', 'تسليم خلال 7 أيام'] },
+  { id: 502, name: 'تصميم لوجو احترافي', desc: '3 تصاميم + الملفات', price: 299, grad: 'from-purple-600 to-pink-700', icon: <Sparkles className="w-6 h-6" />, features: ['3 تصاميم مختلفة', 'ملفات المصدر', 'حقوق كاملة', 'تسليم خلال 3 أيام'] },
+  { id: 503, name: 'إدارة سوشال ميديا', desc: 'إدارة كاملة لشهر', price: 599, grad: 'from-orange-500 to-red-600', icon: <MessageCircle className="w-6 h-6" />, features: ['30 بوست شهري', 'رد على التعليقات', 'تقرير أسبوعي', 'تصميمات مخصصة'] },
+  { id: 504, name: 'كتابة محتوى SEO', desc: '10 مقالات احترافية', price: 349, grad: 'from-green-600 to-teal-700', icon: <Tag className="w-6 h-6" />, features: ['10 مقالات 1000 كلمة', 'بحث كلمات مفتاحية', 'تحسين SEO', 'تسليم خلال 5 أيام'] },
+  { id: 505, name: 'إعداد متجر إلكتروني', desc: 'متجر Shopify كامل', price: 899, grad: 'from-cyan-600 to-blue-700', icon: <ShoppingBag className="w-6 h-6" />, features: ['تصميم احترافي', 'ربط الدفع', '10 منتجات مضافة', 'تدريب على الإدارة'] },
+  { id: 506, name: 'تصميم هوية بصرية', desc: 'شعار + ألوان + خطوط', price: 399, grad: 'from-rose-600 to-pink-700', icon: <Star className="w-6 h-6" />, features: ['شعار احترافي', 'دليل الهوية', 'ألوان وخطوط', 'ملفات المصدر'] },
 ];
 
 const specialOffers = [
-  { name: 'باقة الألعاب الشاملة', desc: 'PS + Xbox + Steam', oldPrice: 589, price: 449, grad: 'from-indigo-600 to-purple-800', tag: 'وفر 24%' },
-  { name: 'باقة الاشتراكات', desc: 'Netflix + Spotify + YouTube', oldPrice: 93, price: 69, grad: 'from-red-600 to-pink-800', tag: 'وفر 26%' },
-  { name: 'باقة AI احترافية', desc: 'ChatGPT + Claude + Gemini', oldPrice: 237, price: 179, grad: 'from-teal-600 to-emerald-800', tag: 'وفر 24%' },
+  { id: 601, name: 'باقة الألعاب الشاملة', desc: 'PS + Xbox + Steam', oldPrice: 589, price: 449, grad: 'from-indigo-600 to-purple-800', tag: 'وفر 24%', features: ['بطاقة PlayStation 50$', 'بطاقة Xbox 50$', 'بطاقة Steam 50$', 'تسليم فوري', 'ضمان 30 يوم'] },
+  { id: 602, name: 'باقة الاشتراكات', desc: 'Netflix + Spotify + YouTube', oldPrice: 93, price: 69, grad: 'from-red-600 to-pink-800', tag: 'وفر 26%', features: ['Netflix شهر', 'Spotify شهر', 'YouTube Premium شهر', 'تفعيل فوري', 'ضمان استمرارية'] },
+  { id: 603, name: 'باقة AI احترافية', desc: 'ChatGPT + Claude + Gemini', oldPrice: 237, price: 179, grad: 'from-teal-600 to-emerald-800', tag: 'وفر 24%', features: ['ChatGPT Plus', 'Claude Pro', 'Gemini Advanced', 'وصول كامل', 'تفعيل فوري'] },
 ];
 
 /* ═══════════════════════════════════════════════
@@ -240,16 +240,19 @@ export default function Home() {
             subtitle="فريق متخصص جاهز لتنفيذ مشاريعك الرقمية" />
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {digitalServices.map((s, i) => (
-              <div key={i} className="group flex items-start gap-4 bg-[#151520] border border-white/[0.06] rounded-2xl p-5 hover:border-orange-500/30 transition-all hover:-translate-y-1 cursor-pointer">
+              <Link key={i} to={`/product/${s.id}`} state={{ product: { id: s.id, title: s.name, description: s.desc, longDescription: s.name + ' - ' + s.desc, price: s.price, image: '/images/products/digital/service-' + s.id + '.jpg', category: 'service', rating: 4.9, reviews: 80, features: s.features, fileType: 'خدمة', fileSize: '-', inStock: true } }} className="group flex items-start gap-4 bg-[#151520] border border-white/[0.06] rounded-2xl p-5 hover:border-orange-500/30 transition-all hover:-translate-y-1">
                 <div className={`w-14 h-14 rounded-xl ${s.grad} flex items-center justify-center shrink-0 text-white`}>
                   {s.icon}
                 </div>
                 <div className="flex-1">
                   <h3 className="text-white font-semibold mb-1">{s.name}</h3>
                   <p className="text-gray-500 text-sm mb-2">{s.desc}</p>
-                  <p className="text-white font-bold">يبدأ من {s.price} ر.س</p>
+                  <div className="flex items-center justify-between">
+                    <p className="text-white font-bold">{s.price} ر.س</p>
+                    <span className="opacity-0 group-hover:opacity-100 transition-opacity bg-orange-600 text-white text-[10px] px-2 py-1 rounded-full">شراء</span>
+                  </div>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>
@@ -268,7 +271,7 @@ export default function Home() {
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             {specialOffers.map((o, i) => (
-              <div key={i} className="group relative bg-[#151520] border border-white/[0.06] rounded-2xl p-6 hover:border-red-500/30 transition-all hover:-translate-y-1 overflow-hidden">
+              <Link key={i} to={`/product/${o.id}`} state={{ product: { id: o.id, title: o.name, description: o.desc, longDescription: o.name + ' - ' + o.desc, price: o.price, originalPrice: o.oldPrice, image: '/images/products/bundles/bundle-' + o.id + '.jpg', category: 'bundle', rating: 4.9, reviews: 150, features: o.features, fileType: 'باقة', fileSize: '-', inStock: true } }} className="group relative bg-[#151520] border border-white/[0.06] rounded-2xl p-6 hover:border-red-500/30 transition-all hover:-translate-y-1 overflow-hidden">
                 <div className={`absolute inset-0 ${o.grad} opacity-10`} />
                 <span className="absolute top-4 right-4 bg-red-500 text-white text-xs font-bold px-3 py-1 rounded-full">{o.tag}</span>
                 <h3 className="text-white font-bold text-lg mb-1 relative z-10">{o.name}</h3>
@@ -277,10 +280,10 @@ export default function Home() {
                   <span className="text-gray-500 line-through text-sm">{o.oldPrice} ر.س</span>
                   <span className="text-white font-bold text-2xl">{o.price} ر.س</span>
                 </div>
-                <a href="https://wa.me/966569888456" target="_blank" rel="noopener noreferrer" className="mt-4 block w-full text-center bg-gradient-to-r from-red-500 to-pink-600 text-white py-2.5 rounded-xl font-medium hover:shadow-lg transition-all relative z-10">
-                  اطلب الآن
-                </a>
-              </div>
+                <span className="mt-4 block w-full text-center bg-gradient-to-r from-red-500 to-pink-600 text-white py-2.5 rounded-xl font-medium group-hover:shadow-lg transition-all relative z-10">
+                  اشتري الآن
+                </span>
+              </Link>
             ))}
           </div>
         </div>
